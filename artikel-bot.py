@@ -1,5 +1,3 @@
-from email import message
-from unittest.result import failfast
 import requests
 from bs4 import BeautifulSoup
 import re
