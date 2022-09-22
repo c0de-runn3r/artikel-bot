@@ -7,18 +7,17 @@ word = inp_word.capitalize()
 
 def check(word):
     check_der = requests.get('https://der-artikel.de/der/' + word + '.html')
+    check_das = requests.get('https://der-artikel.de/das/' + word + '.html')
+    check_die = requests.get('https://der-artikel.de/die/' + word + '.html')
     if check_der:
         return "der"
+    elif check_das:
+        return "das"
+    elif check_die:
+        return "die"
     else:
-        check_das = requests.get('https://der-artikel.de/das/' + word + '.html')
-        if check_das:
-            return "das"
-        else:
-            check_die = requests.get('https://der-artikel.de/die/' + word + '.html')
-            if check_die:
-                return "die"
-            else:
-                return None
+        return None
+
 if check(word) == None:
     print("Sorry, I don't know this word :(")
 else:
@@ -33,16 +32,15 @@ def check_art():
         return 'https://der-artikel.de/die/' + word + '.html'
     else:
         return None
-
-url = check_art()
-page = requests.get(url)
-soup = BeautifulSoup(page.content, "html.parser")
-element = soup.find("h3", class_="mb-5")
-form_el = element.text.strip()
-
-el = re.split('\W+', form_el)
-trnsl = el[-1]
-print("eng: " + trnsl)
-
+def translateToEnglish():
+    url = check_art()
+    page = requests.get(url)
+    soup = BeautifulSoup(page.content, "html.parser")
+    element = soup.find("h3", class_="mb-5")
+    form_el = element.text.strip()
+    el = re.split('\W+', form_el)
+    trnsl = el[-1]
+    return("eng: " + trnsl)
+print(translateToEnglish())
 
 
