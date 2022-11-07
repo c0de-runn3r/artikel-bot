@@ -1,5 +1,5 @@
 from aiogram import Bot, types, Dispatcher, executor
-from config import bot_token, openWeatherApiKey
+from config import bot_token
 import requests
 from bs4 import BeautifulSoup
 import re
